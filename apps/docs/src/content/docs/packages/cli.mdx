@@ -1,0 +1,30 @@
+---
+title: '@mayan-numerals/cli'
+description: Draw numbers as Maya numerals from the command line.
+---
+
+```sh
+npx @mayan-numerals/cli 1993 > 1993.svg
+npx @mayan-numerals/cli 3.14159 -o pi.webp --size 200
+npx @mayan-numerals/cli -42 -o minus.png
+```
+
+Installed globally with `npm install -g @mayan-numerals/cli`, the command is `mayan`. The output format comes from the file extension. Without `--output`, it prints SVG.
+
+| Option                     | Notes                                                                     |
+| -------------------------- | ------------------------------------------------------------------------- |
+| `-o, --output <file>`      | `.svg`, `.png`, `.jpg`, `.jpeg` or `.webp`.                               |
+| `-s, --size <px>`          | Image width in pixels. Default 100.                                       |
+| `-c, --color <color>`      | Colour or CSS gradient. Default `currentColor` for SVG, black for images. |
+| `-b, --background <color>` | Background colour or CSS gradient. Default transparent, white for JPEG.   |
+| `-g, --gap <n>`            | Space between levels. Default 24.                                         |
+| `-q, --quality <1-100>`    | JPEG and WebP quality.                                                    |
+
+Gradients use CSS syntax. Quote them for the shell:
+
+```sh
+mayan 123456789 -o rainbow.png \
+  -c 'linear-gradient(to bottom, #e03131, #f76707, #fab005, #40c057, #228be6, #7048e8, #be4bdb)'
+```
+
+Exits with `1` when the number can't be drawn and `2` for a usage error.

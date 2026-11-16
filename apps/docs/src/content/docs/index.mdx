@@ -1,0 +1,56 @@
+---
+title: Maya Numerals
+description: Render any number as Maya numerals in SVG, PNG, JPEG or WebP, from code or the command line.
+template: splash
+hero:
+  tagline: >-
+    Draw any number the way the Maya did: dots for ones, bars for fives and a shell for zero, stacked in base 20. SVG with zero dependencies, plus PNG, JPEG and WebP.
+  actions:
+    - text: Open the playground
+      link: /mayan-numerals/playground/
+      icon: pencil
+    - text: Get started
+      link: /mayan-numerals/getting-started/
+      icon: right-arrow
+      variant: secondary
+    - text: GitHub
+      link: https://github.com/karlnorling/mayan-numerals
+      icon: github
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import Glyph from '../../components/Glyph.astro';
+import ColourExamples from '../../components/ColourExamples.astro';
+
+<div class="examples">
+  <Glyph value={1993} caption="1993" />
+  <Glyph value={20} caption="20" />
+  <Glyph value={400} caption="400" />
+  <Glyph value={'3.14159'} caption="3.14159" />
+  <Glyph value={-42} caption="-42" />
+</div>
+
+<ColourExamples />
+
+<CardGrid>
+  <Card title="Try any number" icon="pencil">
+    The [playground](/mayan-numerals/playground/) draws whatever you type, breaks it into base-20
+    digits, and lets you download SVG, PNG, JPEG or WebP.
+  </Card>
+  <Card title="Fractions and negatives" icon="add-document">
+    Fractions continue below a dashed line in base 20, and negatives get a minus mark. [See
+    how](/mayan-numerals/how-it-works/).
+  </Card>
+  <Card title="Zero dependencies" icon="seti:svg">
+    `@mayan-numerals/core` turns a number into an SVG string in any JavaScript runtime.
+  </Card>
+  <Card title="Images and CLI" icon="seti:image">
+    `@mayan-numerals/raster` renders PNG, JPEG and WebP with sharp, and `@mayan-numerals/cli` does
+    it from the terminal.
+  </Card>
+</CardGrid>
+
+<style>{`
+  .examples { display: flex; flex-wrap: wrap; justify-content: center; align-items: end; gap: 2rem; margin-block: 1rem 2.5rem; }
+`}</style>

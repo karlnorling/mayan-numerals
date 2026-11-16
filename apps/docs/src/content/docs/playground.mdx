@@ -1,0 +1,20 @@
+---
+title: Playground
+description: Type a number and see it drawn as Maya numerals. Change the style, then download it or copy the code.
+tableOfContents: false
+---
+
+import Playground from '../../components/Playground.astro';
+import ColourExamples from '../../components/ColourExamples.astro';
+
+Type any number: whole, decimal, negative or very large. The link updates as you type, so you can share what you made.
+
+<Playground />
+
+Downloads are rendered by your browser. To render images on a server, use [`@mayan-numerals/raster`](/mayan-numerals/packages/raster/) or the [CLI](/mayan-numerals/packages/cli/).
+
+## Colour examples
+
+Colours and backgrounds take CSS gradients. Pick an example to load it above, or use the **Looks** buttons in the style panel.
+
+<ColourExamples />
