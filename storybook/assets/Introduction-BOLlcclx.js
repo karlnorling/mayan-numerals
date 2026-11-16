@@ -1,0 +1,9 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{s as t}from"./chunk-W22LQPXL-D4uv3rSz.js";import{i as n,r}from"./react-DITjJg24.js";import{a as i,o as a}from"./blocks-BD2qDtLW.js";function o(e){let t={a:`a`,code:`code`,h1:`h1`,li:`li`,p:`p`,strong:`strong`,ul:`ul`,...n(),...e.components};return(0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)(i,{title:`Introduction`}),`
+`,(0,c.jsx)(t.h1,{id:`maya-numerals`,children:`Maya Numerals`}),`
+`,(0,c.jsxs)(t.p,{children:[`Stories for `,(0,c.jsx)(t.a,{href:`https://www.npmjs.com/package/@mayan-numerals/core`,rel:`nofollow`,children:(0,c.jsx)(t.code,{children:`@mayan-numerals/core`})}),`, which renders any number as `,(0,c.jsx)(t.a,{href:`https://en.wikipedia.org/wiki/Maya_numerals`,rel:`nofollow`,children:`Maya numerals`}),` in SVG.`]}),`
+`,(0,c.jsxs)(t.ul,{children:[`
+`,(0,c.jsxs)(t.li,{children:[(0,c.jsx)(t.strong,{children:`Number Builder`}),`: type any number in the `,(0,c.jsx)(t.code,{children:`value`}),` control and adjust every `,(0,c.jsx)(t.code,{children:`toSvg`}),` option.`]}),`
+`,(0,c.jsxs)(t.li,{children:[(0,c.jsx)(t.strong,{children:`Digits`}),`: every digit from 0 to 19.`]}),`
+`]}),`
+`,(0,c.jsx)(t.p,{children:`Dots are ones, bars are fives and a shell is zero. Levels stack in base 20 with the most significant on top. Fractions continue below a dashed line, and negatives get a minus mark.`}),`
+`,(0,c.jsxs)(t.p,{children:[`For downloads and shareable links, use the `,(0,c.jsx)(t.a,{href:`../playground/`,children:`playground`}),` in the docs.`]})]})}function s(e={}){let{wrapper:t}={...n(),...e.components};return t?(0,c.jsx)(t,{...e,children:(0,c.jsx)(o,{...e})}):o(e)}var c;function l(){return(l=e((()=>{c=t(),r(),a()})))()}l();export{s as default};
