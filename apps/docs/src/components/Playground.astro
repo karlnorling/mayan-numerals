@@ -119,7 +119,7 @@ const modes = [
   <div class="stage" id="pg-stage" aria-live="polite"></div>
 
   <section class="breakdown" aria-labelledby="pg-breakdown-title">
-    <h3 id="pg-breakdown-title">Digit by digit, in base {system.base}</h3>
+    <h3 id="pg-breakdown-title">{system.breakdownTitle}</h3>
     <ol class="groups" id="pg-groups"></ol>
   </section>
 
@@ -140,15 +140,19 @@ const modes = [
 </div>
 
 <script>
-  import {
-    digitSvg,
-    format,
-    parse,
-    parseGradient,
-    toSvg,
-    type SvgOptions,
-  } from '@mayan-numerals/core';
+  import * as core from '@mayan-numerals/core';
+  import type { SvgOptions } from '@mayan-numerals/core';
   import { system } from '../system';
+
+  const { digitSvg, format, parse, parseGradient, toSvg } = core;
+  interface Part {
+    svg: string;
+    label: string;
+    place: string;
+  }
+  /** Systems whose parts aren't one digit per place export their own breakdown. */
+  const customBreakdown = (core as unknown as { breakdown?: (value: string, options: SvgOptions) => Part[] })
+    .breakdown;
 
   type Options = SvgOptions & Record<string, unknown>;
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -254,13 +258,21 @@ const modes = [
     value.removeAttribute('aria-invalid');
     current = { input, options: opts };
     stage.innerHTML = svg;
-    renderGroups(parsed, opts);
+    renderGroups(input, parsed, opts);
     renderCode(input, opts);
     saveHash();
   }
 
-  function renderGroups(parsed: ReturnType<typeof parse>, opts: Options) {
+  function renderGroups(input: string, parsed: ReturnType<typeof parse>, opts: Options) {
     const mini = { ...opts, size: system.miniSize, padding: 6, title: false as const, background: undefined, color: miniColor(opts.color) };
+    if (customBreakdown) {
+      const parts = customBreakdown(input, mini);
+      groups.innerHTML = parts
+        .map((part) => `<li>${part.svg}<code>${part.label}</code><small>${part.place}</small></li>`)
+        .join('');
+      groups.setAttribute('aria-label', `${format(parsed)} in ${parts.length} parts`);
+      return;
+    }
     const item = (digit: number, power: number, place: string) =>
       `<li>${digitSvg(digit, power, mini)}<code>${digit}</code><small>${place}</small></li>`;
     const sup = (n: number) => (n > 1 ? `<sup>${n}</sup>` : '');
@@ -299,7 +311,8 @@ const modes = [
       const v = opts[extra.key];
       if (v === extra.default) continue;
       changed.push(`${extra.key}: ${typeof v === 'string' ? `'${v}'` : v}`);
-      flags.push(typeof v === 'boolean' ? (v ? extra.flag : `--no-${extra.flag.slice(2)}`) : `${extra.flag} ${v}`);
+      // A boolean flag always switches away from the default.
+      flags.push(typeof v === 'boolean' ? extra.flag : `${extra.flag} ${v}`);
     }
     if (opts.color !== 'currentColor') {
       changed.push(`color: '${opts.color}'`);

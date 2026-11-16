@@ -17,6 +17,7 @@ export interface Look {
 export const system = {
   name: 'Maya numerals',
   base: 20,
+  breakdownTitle: 'Digit by digit, in base 20',
   sizeLabel: 'Width',
   sizeDefault: 120,
   gapDefault: 24,
