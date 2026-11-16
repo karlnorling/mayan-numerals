@@ -1,6 +1,6 @@
 {
   "name": "@mayan-numerals/cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Draw Maya numerals from the command line: SVG, PNG, JPEG or WebP",
   "keywords": [
     "base-20",
