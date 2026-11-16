@@ -1,0 +1,60 @@
+---
+title: How numbers are drawn
+description: Dots, bars and shells, the base-20 levels they stack in, and how this library draws fractions and negatives.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Glyph from '../../components/Glyph.astro';
+import DigitChart from '../../components/DigitChart.astro';
+
+Maya numerals use three signs: a **dot** for one, a **bar** for five and a **shell** for zero. One digit, from 0 to 19, is up to three bars with up to four dots on top.
+
+## The twenty digits
+
+<DigitChart />
+
+## Levels
+
+Digits stack in levels, with the most significant on top. Each level is worth twenty times the one below it:
+
+| Level from the bottom | Worth   |
+| --------------------- | ------- |
+| 1st                   | 1       |
+| 2nd                   | 20      |
+| 3rd                   | 400     |
+| 4th                   | 8,000   |
+| 5th                   | 160,000 |
+
+So 1993 is 4 × 400 + 19 × 20 + 13: four dots, then three bars and four dots, then two bars and three dots.
+
+<div class="row">
+  <Glyph value={1993} caption="1993" />
+  <Glyph value={20} caption="20" />
+  <Glyph value={400} caption="400" />
+  <Glyph value={8000} caption="8000" />
+</div>
+
+The shell keeps empty levels in place, so 20 and 400 can't be confused with 1. That made the Maya system one of the first with a true zero.
+
+<Aside title="The calendar exception">
+  The Long Count calendar counted 18 in its third place instead of 20, so that place was worth 360
+  days, close to a year. This library draws the pure base-20 numbers used for counting.
+</Aside>
+
+## Fractions and negatives
+
+The Maya didn't write fractions or negative numbers. This library adds them so every decimal number gets a drawing:
+
+- **Fractions** continue below a dashed line, in base 20: each level is worth a twentieth of the one above. Every decimal fraction comes out exact, because 10ⁿ divides 20ⁿ. `0.5` is 10 twentieths, and `0.01` is 0 twentieths and 4 four-hundredths.
+- **Negatives** get a short minus mark beside the top level.
+
+<div class="row">
+  <Glyph value="12.5" caption="12.5" />
+  <Glyph value="0.01" caption="0.01" />
+  <Glyph value="3.14159" caption="3.14159" />
+  <Glyph value={-42} caption="-42" />
+</div>
+
+<style>{`
+  .row { display: flex; flex-wrap: wrap; gap: 2rem; align-items: end; margin-block: 1.5rem; }
+`}</style>

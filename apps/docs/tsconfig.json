@@ -1,0 +1,8 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "paths": {
+      "@mayan-numerals/core": ["../../packages/@mayan-numerals/core/src/index.ts"]
+    }
+  }
+}

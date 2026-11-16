@@ -1,0 +1,69 @@
+---
+title: Getting started
+description: Install the package you need and draw your first Maya numeral.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Pick the package for where you render:
+
+| Package                                                      | Use it for                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| [`@mayan-numerals/core`](/mayan-numerals/packages/core/)     | SVG strings in any JavaScript runtime, browser included. No dependencies. |
+| [`@mayan-numerals/raster`](/mayan-numerals/packages/raster/) | PNG, JPEG or WebP in Node. Uses sharp.                                    |
+| [`@mayan-numerals/cli`](/mayan-numerals/packages/cli/)       | Files from the terminal or scripts.                                       |
+
+## SVG
+
+<Tabs syncKey="pm">
+  <TabItem label="npm">
+
+```sh
+npm install @mayan-numerals/core
+```
+
+  </TabItem>
+  <TabItem label="yarn">
+
+```sh
+yarn add @mayan-numerals/core
+```
+
+  </TabItem>
+  <TabItem label="pnpm">
+
+```sh
+pnpm add @mayan-numerals/core
+```
+
+  </TabItem>
+</Tabs>
+
+```js
+import { toSvg } from '@mayan-numerals/core';
+
+document.querySelector('#year').innerHTML = toSvg(new Date().getFullYear(), { size: 120 });
+```
+
+The SVG uses `currentColor` by default, so it takes the colour of the text around it.
+
+## Images
+
+```sh
+npm install @mayan-numerals/raster
+```
+
+```js
+import { toImage } from '@mayan-numerals/raster';
+import { writeFile } from 'node:fs/promises';
+
+await writeFile('1993.webp', await toImage(1993, { format: 'webp', size: 400 }));
+```
+
+## Command line
+
+```sh
+npx @mayan-numerals/cli 1993 -o 1993.png --size 200
+```
+
+Not sure what a number will look like? Try it in the [playground](/mayan-numerals/playground/).
